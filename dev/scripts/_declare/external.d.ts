@@ -1,0 +1,1 @@
+declare var JSON_DATA:any;

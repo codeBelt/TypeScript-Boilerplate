@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<!-- @if NODE_ENV == 'DEVELOPMENT' -->
+<html lang="en">
+<!-- @endif -->
+
+<!-- @if NODE_ENV == 'PRODUCTION' -->
+<html lang="en" manifest="offline.manifest">
+<!-- @endif -->
+
+    <head>
+        <!-- The current version of the application -->
+        <meta name="version" content="<!-- @echo appVersion -->"/>
+
+        <!-- Define charset for HTML5 Doctype -->
+        <meta charset="utf-8" />
+
+        <!-- Add the fav icon -->
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+        <!-- META DATA IOS WEBAPP -->
+        <meta name="apple-mobile-web-app-title" content="App Title">
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="apple-touch-icon" sizes="29x29" href="<!-- @echo filePath -->images/moblie-icons/icon-29x29.png" />
+        <link rel="apple-touch-icon" sizes="50x50" href="<!-- @echo filePath -->images/moblie-icons/icon-50x50.png" />
+        <link rel="apple-touch-icon" sizes="58x58" href="<!-- @echo filePath -->images/moblie-icons/icon-58x58.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="<!-- @echo filePath -->images/moblie-icons/icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="100x100" href="<!-- @echo filePath -->images/moblie-icons/icon-100x100.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="<!-- @echo filePath -->images/moblie-icons/icon-144x144.png">
+
+        <meta name="format-detection" content="telephone-no">
+
+        <!--The initial scale of the viewport as a multiplier. The default is calculated to fit the webpage in the visible area. The range is determined by the minimum-scale and maximum-scale properties.
+        You can set only the initial scale of the viewport—the scale of the viewport the first time the webpage is displayed. Thereafter, the user can zoom in and out unless you set user-scalable to no. Zooming by the user is also limited by the minimum-scale and maximum-scale properties.-->
+        <meta name="viewport" content="initial-scale=1.0">
+        <!--Specifies the minimum scale value of the viewport. The default is 0.25. The range is from >0 to 10.0.-->
+        <meta name="viewport" content="minimum-scale=1.0">
+        <!--Specifies the maximum scale value of the viewport. The default is 5.0. The range is from >0 to 10.0.-->
+        <meta name="viewport" content="maximum-scale=1.0">
+        <!--Determines whether or not the user can zoom in and out—whether or not the user can change the scale of the viewport. Set to yes to allow scaling and no to disallow scaling. The default is yes.
+        Setting user-scalable to no also prevents a webpage from scrolling when entering text in an input field.-->
+        <meta name="viewport" content="user-scalable=no">
+        <!--The width of the viewport in pixels. The default is 980. The range is from 200 to 10,000.-->
+        <meta name="viewport" content="width=device-width">
+
+        <!-- @if NODE_ENV == 'DEVELOPMENT' -->
+            <link rel="stylesheet" media="screen, projection" href="styles/add2Home.css" />
+            <link rel="stylesheet" media="screen, projection" href="styles/screen.css" />
+        <!-- @endif -->
+
+        <!-- @if NODE_ENV == 'PRODUCTION' -->
+            <link rel="stylesheet" media="screen, projection" href="styles/main.min.css" />
+        <!-- @endif -->
+
+
+    </head>
+    <body>
+        <!-- @if NODE_ENV == 'DEVELOPMENT' -->
+            <script src="libs/jquery/jquery-1.9.1.js"></script>
+            <script src="libs/handlebars/handlebars.js"></script>
+            <script src="scripts/_compiled/json.js"></script>
+            <script src="scripts/_compiled/templates.tmpl.js"></script>
+            <script src="scripts/_compiled/app.js"></script>
+        <!-- @endif -->
+
+        <!-- @if NODE_ENV == 'PRODUCTION' -->
+            <script src="scripts/app.min.js"></script>
+        <!-- @endif -->
+
+        <script>
+            window.onload = function(event) {
+                var app = new TestApp();
+            }
+        </script>
+    </body>
+</html>
