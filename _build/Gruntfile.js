@@ -36,9 +36,8 @@ module.exports = function(grunt) {
                 url: '<%= pkg.homepage %>',
                 options: {
                     paths: '<%= DEVELOPMENT_PATH %>' + 'scripts/com/',
-//                    paths: '<%= DEVELOPMENT_PATH %>',
                     outdir: '<%= BASE_PATH %>docs',
-//                    themedir: 'yuidoc/themes/nerdery-standard-theme',
+                    themedir: '',
                     extension: '.ts',                                   // Default '.js' <comma-separated list of file extensions>
                     exclude: ''
                 }
@@ -101,7 +100,7 @@ module.exports = function(grunt) {
                     preferOnline: false,
                     verbose: true,
                     timestamp: true,
-                    master: ['<%= PRODUCTION_PATH %>index.html']
+                    master: []
                 },
                 src: [
                     'data/**/*.json',
@@ -110,7 +109,7 @@ module.exports = function(grunt) {
                     'scripts/**/*.js',
                     'styles/**/*.css'
                 ],
-                dest: '<%= PRODUCTION_PATH %>' + 'offline.manifest'
+                dest: '<%= PRODUCTION_PATH %>' + 'cache.manifest'
             }
         },
 
@@ -357,16 +356,10 @@ module.exports = function(grunt) {
 
     // Grunt tasks.
     grunt.registerTask('default', ['server']);
-    grunt.registerTask('dev', ['env:dev', 'preprocess:dev', 'sass:dev', 'handlebars', 'typescript']);
+    grunt.registerTask('dev', ['env:dev', 'preprocess:dev', 'json', 'handlebars', 'typescript']);
     grunt.registerTask('prod', ['env:prod', 'preprocess:prod', 'cssmin', 'htmlmin', 'handlebars', 'typescript', 'concat:prod', 'uglify', 'copy:prod', 'concat:addBanner', 'manifest']);
 
-    grunt.registerTask('css', ['watch:sass']);
-    grunt.registerTask('temp', ['json', 'handlebars', 'typescript']);
-
-    grunt.registerTask('server', ['express:dev', 'open:dev', 'watch:dev']);
+    grunt.registerTask('server', ['dev', 'express:dev', 'open:dev', 'watch:dev']);
     grunt.registerTask('server:prod', ['prod', 'express:prod', 'open:prod', 'watch:prod']);
-
-    //https://npmjs.org/package/grunt-html-build
-    //https://github.com/yeoman/grunt-usemin
 
 };

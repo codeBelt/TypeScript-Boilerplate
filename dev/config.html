@@ -46,8 +46,8 @@
         <meta name="viewport" content="width=device-width">
 
         <!-- @if NODE_ENV == 'DEVELOPMENT' -->
-            <link rel="stylesheet" media="screen, projection" href="styles/add2Home.css" />
-            <link rel="stylesheet" media="screen, projection" href="styles/screen.css" />
+            <link rel="stylesheet" type="text/css" media="screen" href="styles/bootstrap.css" />
+            <link rel="stylesheet" type="text/css" media="screen" href="styles/screen.css" />
         <!-- @endif -->
 
         <!-- @if NODE_ENV == 'PRODUCTION' -->
@@ -56,13 +56,13 @@
 
 
     </head>
-    <body>
+    <body onload="javascript:init();">
         <!-- @if NODE_ENV == 'DEVELOPMENT' -->
-            <script src="libs/jquery/jquery-1.9.1.js"></script>
-            <script src="libs/handlebars/handlebars.js"></script>
-            <script src="scripts/_compiled/json.js"></script>
-            <script src="scripts/_compiled/templates.tmpl.js"></script>
-            <script src="scripts/_compiled/app.js"></script>
+            <script type="text/javascript" src="libs/jquery/jquery-1.9.1.js"></script>
+            <script type="text/javascript" src="libs/handlebars/handlebars.js"></script>
+            <script type="text/javascript" src="scripts/_compiled/json.js"></script>
+            <script type="text/javascript" src="scripts/_compiled/templates.tmpl.js"></script>
+            <script type="text/javascript" src="scripts/_compiled/app.js"></script>
         <!-- @endif -->
 
         <!-- @if NODE_ENV == 'PRODUCTION' -->

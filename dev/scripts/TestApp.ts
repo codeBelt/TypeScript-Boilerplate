@@ -8,8 +8,8 @@ class TestApp {
 
     constructor ()
     {
-        this._countryData = JSON_DATA.countryList;
-        console.log(this._countryData);
+        this._countryData = JSON_DATA.countrylist;
+        console.log(JSON_DATA);
     }
 
 }
