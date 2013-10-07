@@ -1,0 +1,9 @@
+class TopBarView {
+
+    constructor() {
+        Handlebars
+
+
+    }
+
+}
