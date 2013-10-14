@@ -113,21 +113,6 @@ module.exports = function(grunt) {
             }
         },
 
-        // Compiles our Sass files into css.
-        sass: {
-            dev: {
-                options: {
-                    style: 'expanded',
-                    trace: false
-                },
-                files: {
-                    '<%= DEVELOPMENT_PATH %>styles/screen.css': [
-                        '<%= DEVELOPMENT_PATH %>' + 'styles/sass/style.scss'
-                    ]
-                }
-            }
-        },
-
         // Minifies our css files that we specify and adds the banner to the top
         // of the minified css file.
         cssmin: {
@@ -309,8 +294,7 @@ module.exports = function(grunt) {
                 files: [
                     '<%= DEVELOPMENT_PATH %>' + 'scripts/**/*.ts',
                     '<%= DEVELOPMENT_PATH %>' + 'config.html',
-                    '<%= DEVELOPMENT_PATH %>' + 'templates/**/*.hbs',
-                    '<%= DEVELOPMENT_PATH %>' + 'styles/sass/**/*.scss'
+                    '<%= DEVELOPMENT_PATH %>' + 'templates/**/*.hbs'
                 ],
                 tasks: ['dev']
             },
@@ -321,16 +305,9 @@ module.exports = function(grunt) {
                 files: [
                     '<%= DEVELOPMENT_PATH %>' + 'scripts/**/*.ts',
                     '<%= DEVELOPMENT_PATH %>' + 'config.html',
-                    '<%= DEVELOPMENT_PATH %>' + 'templates/**/*.hbs',
-                    '<%= DEVELOPMENT_PATH %>' + 'styles/sass/**/*.scss'
+                    '<%= DEVELOPMENT_PATH %>' + 'templates/**/*.hbs'
                 ],
                 tasks: ['prod']
-            },
-            sass: {
-                files: [
-                    '<%= DEVELOPMENT_PATH %>' + 'styles/sass/**/*.scss'
-                ],
-                tasks: ['sass:dev']
             },
             typescript: {
                 files: [
