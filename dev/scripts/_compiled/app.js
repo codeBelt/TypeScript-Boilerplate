@@ -3,34 +3,36 @@ var TemplateFactory = (function () {
     }
     TemplateFactory.create = function (templatePath, data) {
         if (typeof data === "undefined") { data = null; }
-        var templateObj = window[TemplateFactory.templateNamespace];
-        var templateFunction = templateObj[templatePath];
+        var templateFunction = TemplateFactory.TEMPLATES[templatePath];
         var template = templateFunction(data);
 
         return template;
     };
     TemplateFactory.CLASS_NAME = 'TemplateFactory';
 
+    TemplateFactory.TEMPLATES = null;
+
     TemplateFactory.templateNamespace = 'JST';
     return TemplateFactory;
 })();
 var TestApp = (function () {
     function TestApp() {
+        this._parent = null;
         this._countryData = null;
-        this._countryData = JSON_DATA.countrylist;
-        console.log(JSON_DATA);
-        TestApp.TEMPLATES = JST;
-
-        this._countryData = JSON_DATA.countryList;
-
-        var $body = $('body');
-
+        TemplateFactory.TEMPLATES = (window).JST;
+        this._countryData = (window).JSON_DATA.countryList;
+    }
+    TestApp.prototype.createChildren = function () {
         var template = TemplateFactory.create('templates/topbar/TopNavigationTemplate.hbs');
-        $body.append(template);
+        this._parent.append(template);
 
         template = TemplateFactory.create('templates/login/LoginTemplate.hbs', { title: 'TypeScript Boilerplate' });
-        $body.append(template);
-    }
-    TestApp.TEMPLATES = null;
+        this._parent.append(template);
+    };
+
+    TestApp.prototype.appendTo = function (selector) {
+        this._parent = $(selector);
+        this.createChildren();
+    };
     return TestApp;
 })();

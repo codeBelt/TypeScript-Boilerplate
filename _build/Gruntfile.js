@@ -153,10 +153,7 @@ module.exports = function(grunt) {
                     // Copy favicon.ico file from dev/ to prod/.
                     { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: 'favicon.ico', dest: '<%= PRODUCTION_PATH %>' },
                     // Copy the image folder from dev/images/ to prod/images/.
-                    { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: ['images/**'], dest: '<%= PRODUCTION_PATH %>' },
-                    { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: ['pdfs/**'], dest: '<%= PRODUCTION_PATH %>' },
-                    // Copy the image folder from dev/images/ to prod/images/.
-                    { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: ['data/**'], dest: '<%= PRODUCTION_PATH %>' }
+                    { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: ['images/**'], dest: '<%= PRODUCTION_PATH %>' }
                 ]
             }
         },
@@ -208,14 +205,13 @@ module.exports = function(grunt) {
                     namespace: 'JST',
                     // Registers all files that start with '_' as a partial.
                     partialRegex: /^_/,
-                    // Path to all partials in a single folder. Example: ../dev/templates/partials/
-                    //partialsPathRegex: /\.\.\/dev\/templates\/partials\//,
+                    // Shortens the file path for the template.
                     processName: function(filename) {
-                        //Shortens the file path for the template.
+
                         return filename.slice(filename.indexOf("template"), filename.length);
                     },
+                    // Shortens the file path for the template.
                     processPartialName: function(filePath) {
-                        //Shortens the file path for the template.
                         return filePath.slice(filePath.indexOf("template"), filePath.length);
                     }
                 },

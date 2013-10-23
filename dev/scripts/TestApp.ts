@@ -5,25 +5,26 @@
 
 class TestApp {
 
-    public static TEMPLATES:any = null;
-
+    private _parent:JQuery = null;
     private _countryData:any = null;
 
     constructor ()
     {
-        this._countryData = JSON_DATA.countrylist;
-        console.log(JSON_DATA);
-        TestApp.TEMPLATES = JST;
+        TemplateFactory.TEMPLATES = (<any>window).JST;
+        this._countryData = (<any>window).JSON_DATA.countryList;
+    }
 
-        this._countryData = JSON_DATA.countryList;
-
-        var $body:JQuery =  $('body');
-
+    private createChildren():void {
         var template:string = TemplateFactory.create('templates/topbar/TopNavigationTemplate.hbs');
-        $body.append(template);
+        this._parent.append(template);
 
         template = TemplateFactory.create('templates/login/LoginTemplate.hbs', {title: 'TypeScript Boilerplate'});
-        $body.append(template);
+        this._parent.append(template);
+    }
+
+    public appendTo(selector:string):void {
+        this._parent =  $(selector);
+        this.createChildren();
     }
 
 }
