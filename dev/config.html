@@ -55,7 +55,7 @@
 
 
     </head>
-    <body onload="javascript:init();">
+    <body>
         <!-- @if NODE_ENV == 'DEVELOPMENT' -->
             <script type="text/javascript" src="libs/jquery/jquery-1.9.1.js"></script>
             <script type="text/javascript" src="libs/handlebars/handlebars.js"></script>
@@ -70,6 +70,9 @@
 
         <script>
             window.onload = function(event) {
+                // Get class from namespace.
+                var TestApp = namespace.TestApp;
+
                 var app = new TestApp();
                 app.appendTo('body');
             }
