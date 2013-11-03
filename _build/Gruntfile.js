@@ -122,11 +122,7 @@ module.exports = function(grunt) {
                     keepSpecialComments: 0                                                  // '*' for keeping all (default), 1 for keeping first one, 0 for removing all
                 },
                 files: {
-                    '<%= PRODUCTION_PATH %>styles/main.min.css': [
-                        '<%= DEVELOPMENT_PATH %>' + 'styles/setup.css',
-                        '<%= DEVELOPMENT_PATH %>' + 'styles/add2Home.css',
-                        '<%= DEVELOPMENT_PATH %>' + 'styles/screen.css'
-                    ]
+                    '<%= PRODUCTION_PATH %>styles/main.min.css': ['<%= DEVELOPMENT_PATH %>' + 'styles/import.css']
                 }
             }
         },
