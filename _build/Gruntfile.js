@@ -109,7 +109,7 @@ module.exports = function(grunt) {
                     'scripts/**/*.js',
                     'styles/**/*.css'
                 ],
-                dest: '<%= PRODUCTION_PATH %>' + 'cache.manifest'
+                dest: '<%= PRODUCTION_PATH %>' + 'manifest.appcache'
             }
         },
 
