@@ -25,8 +25,8 @@ var namespace;
         function TestApp() {
             this._parent = null;
             this._countryData = null;
-            namespace.TemplateFactory.TEMPLATES = (window).JST;
-            this._countryData = (window).JSON_DATA.countryList;
+            namespace.TemplateFactory.TEMPLATES = window.JST;
+            this._countryData = window.JSON_DATA.countryList;
         }
         TestApp.prototype.createChildren = function () {
             var template = namespace.TemplateFactory.create('templates/topbar/TopNavigationTemplate.hbs');

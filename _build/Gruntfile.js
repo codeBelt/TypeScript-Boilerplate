@@ -13,11 +13,12 @@ module.exports = function(grunt) {
         // Constants for the Gruntfile so we can easily change the path for
         // our environments.
         BASE_PATH: '../',
-        DEVELOPMENT_PATH: '../dev/',
-        PRODUCTION_PATH: '../prod/',
+        DEVELOPMENT_PATH: '../src/',
+        PRODUCTION_PATH: '../web/',
 
         // A code block that will be added to all our minified code files.
         // Gets the name and appVersion from the above loaded 'package.json' file.
+        // Usage: <%= banner.join("\\n") %>
         banner: [
                  '/*',
                  '* Project: <%= pkg.name %>',
@@ -47,10 +48,10 @@ module.exports = function(grunt) {
         // The different constants name that will be use to build our html files.
         // Example: <!-- @if NODE_ENV == 'DEVELOPMENT' -->
         env: {
-            dev: {
+            src: {
                 NODE_ENV : 'DEVELOPMENT'
             },
-            prod : {
+            web : {
                 NODE_ENV : 'PRODUCTION'
             }
         },
@@ -59,9 +60,9 @@ module.exports = function(grunt) {
         // can similar files with different data.
         // Example: <!-- @echo appVersion --> or <!-- @echo filePath -->
         preprocess : {
-            // Task to create the dev.html file that will be used during development.
-            // Passes the app version and creates the /dev.html
-            dev : {
+            // Task to create the index.html file that will be used during development.
+            // Passes the app version and creates the /index.html
+            src : {
                 src : '<%= DEVELOPMENT_PATH %>' + 'config.html',
                 dest : '<%= DEVELOPMENT_PATH %>' + 'index.html',
                 options : {
@@ -73,7 +74,7 @@ module.exports = function(grunt) {
             },
             // Task to create the index.html file that will be used in production.
             // Passes the app version and creates the /index.html
-            prod : {
+            web : {
                 src : '<%= DEVELOPMENT_PATH %>' + 'config.html',
                 dest : '<%= PRODUCTION_PATH %>' + 'index.html',
                 options : {
@@ -141,14 +142,14 @@ module.exports = function(grunt) {
             }
         },
 
-        // Copies certain files over from the dev/ folder to the prod/ so we don't
+        // Copies certain files over from the src/ folder to the web/ so we don't
         // have to do it manually.
         copy: {
-            prod:  {
+            web:  {
                 files: [
-                    // Copy favicon.ico file from dev/ to prod/.
+                    // Copy favicon.ico file from src/ to web/.
                     { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: 'favicon.ico', dest: '<%= PRODUCTION_PATH %>' },
-                    // Copy the image folder from dev/images/ to prod/images/.
+                    // Copy the image folder from src/images/ to web/images/.
                     { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: ['images/**'], dest: '<%= PRODUCTION_PATH %>' }
                 ]
             }
@@ -156,7 +157,7 @@ module.exports = function(grunt) {
 
         // Takes the minified JavaScript file and adds the banner to the top.
         concat: {
-            prod: {
+            web: {
                 options: {
                     banner: '<%= banner.join("\\n") %> \n'
                 },
@@ -181,7 +182,7 @@ module.exports = function(grunt) {
 
         // The JSON to JavaScript plugin.
         json: {
-            prod: {
+            web: {
                 options: {
                     namespace: 'JSON_DATA',
                     includePath: false,
@@ -259,7 +260,7 @@ module.exports = function(grunt) {
         // grunt-express will serve the files from the folders listed in `bases`
         // on specified `port` and `hostname`
         express: {
-            dev: {
+            src: {
                 options: {
                     port: 8001,
                     hostname: "0.0.0.0",
@@ -267,7 +268,7 @@ module.exports = function(grunt) {
                     livereload: true
                 }
             },
-            prod: {
+            web: {
                 options: {
                     port: 8000,
                     hostname: "0.0.0.0",
@@ -279,7 +280,7 @@ module.exports = function(grunt) {
 
         // grunt-watch will monitor the projects files
         watch: {
-            dev: {
+            src: {
                 options: {
                     livereload: true
                 },
@@ -288,9 +289,9 @@ module.exports = function(grunt) {
                     '<%= DEVELOPMENT_PATH %>' + 'config.html',
                     '<%= DEVELOPMENT_PATH %>' + 'templates/**/*.hbs'
                 ],
-                tasks: ['dev']
+                tasks: ['src']
             },
-            prod: {
+            web: {
                 options: {
                     livereload: true
                 },
@@ -299,7 +300,7 @@ module.exports = function(grunt) {
                     '<%= DEVELOPMENT_PATH %>' + 'config.html',
                     '<%= DEVELOPMENT_PATH %>' + 'templates/**/*.hbs'
                 ],
-                tasks: ['prod']
+                tasks: ['web']
             },
             typescript: {
                 files: [
@@ -311,13 +312,13 @@ module.exports = function(grunt) {
 
         // grunt-open will open your browser at the project's URL
         open: {
-            dev: {
+            src: {
                 // Gets the port from the connect configuration
-                path: 'http://localhost:<%= express.dev.options.port%>'
+                path: 'http://localhost:<%= express.src.options.port%>'
             },
-            prod: {
+            web: {
                 // Gets the port from the connect configuration
-                path: 'http://localhost:<%= express.prod.options.port%>'
+                path: 'http://localhost:<%= express.web.options.port%>'
             }
         }
 
@@ -325,10 +326,10 @@ module.exports = function(grunt) {
 
     // Grunt tasks.
     grunt.registerTask('default', ['server']);
-    grunt.registerTask('dev', ['env:dev', 'preprocess:dev', 'json', 'handlebars', 'typescript']);
-    grunt.registerTask('prod', ['env:prod', 'preprocess:prod', 'cssmin', 'htmlmin', 'handlebars', 'typescript', 'concat:prod', 'uglify', 'copy:prod', 'concat:addBanner', 'manifest']);
+    grunt.registerTask('src', ['env:src', 'preprocess:src', 'json', 'handlebars', 'typescript']);
+    grunt.registerTask('web', ['env:web', 'preprocess:web', 'cssmin', 'htmlmin', 'handlebars', 'typescript', 'concat:web', 'uglify', 'copy:web', 'concat:addBanner', 'manifest']);
 
-    grunt.registerTask('server', ['dev', 'express:dev', 'open:dev', 'watch:dev']);
-    grunt.registerTask('server:prod', ['prod', 'express:prod', 'open:prod', 'watch:prod']);
+    grunt.registerTask('server', ['src', 'express:src', 'open:src', 'watch:src']);
+    grunt.registerTask('server:web', ['web', 'express:web', 'open:web', 'watch:web']);
 
 };

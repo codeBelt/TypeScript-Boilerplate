@@ -107,25 +107,25 @@ We can do the following to create/register other shortcut command tasks:
 ```
   grunt.registerTask('default', ['requirejs']);
   
-  grunt.registerTask('dev', ['pluginName1', 'pluginName2', 'pluginName3']);
-  grunt.registerTask('prod', ['pluginName1', 'pluginName2', 'pluginName3', 'pluginName4'])
+  grunt.registerTask('src', ['pluginName1', 'pluginName2', 'pluginName3']);
+  grunt.registerTask('web', ['pluginName1', 'pluginName2', 'pluginName3', 'pluginName4'])
 
 ```
-Above you would call `grunt dev` or `grunt prod` depending on what series of plugins you would want to run.
+Above you would call `grunt src` or `grunt web` depending on what series of plugins you would want to run.
 
 One thing to point out is most plugins allow you to have multiple sub tasks. For example checkout the 'grunt-env' plugin below.
 
 ```
 env: {
-	dev: {
-		NODE_ENV : '../dev/'
+	src: {
+		NODE_ENV : '../src/'
 	},
-	prod : {
-		NODE_ENV : '../prod/'
+	web : {
+		NODE_ENV : '../web/'
 	}
 }
 ```
-You can call `grunt env:dev` or `grunt env:prod` to run each sub task. If you were to call `grunt env` it would run both sub tasks.
+You can call `grunt env:src` or `grunt env:web` to run each sub task. If you were to call `grunt env` it would run both sub tasks.
 
 To see an example with several plugins, check out [Single Page JavaScript Application Workflow](http://www.codebelt.com/javascript/single-page-javascript-application-workflow/)
 
