@@ -6,8 +6,6 @@ module namespace {
 
         public static TEMPLATES:any = null;
 
-        public static templateNamespace:string = 'JST';
-
         constructor() {
         }
 

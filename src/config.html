@@ -23,12 +23,12 @@
         <meta name="apple-mobile-web-app-title" content="App Title">
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link rel="apple-touch-icon" sizes="29x29" href="<!-- @echo filePath -->images/moblie-icons/icon-29x29.png" />
-        <link rel="apple-touch-icon" sizes="50x50" href="<!-- @echo filePath -->images/moblie-icons/icon-50x50.png" />
-        <link rel="apple-touch-icon" sizes="58x58" href="<!-- @echo filePath -->images/moblie-icons/icon-58x58.png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="<!-- @echo filePath -->images/moblie-icons/icon-72x72.png" />
-        <link rel="apple-touch-icon" sizes="100x100" href="<!-- @echo filePath -->images/moblie-icons/icon-100x100.png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="<!-- @echo filePath -->images/moblie-icons/icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="29x29" href="<!-- @echo filePath -->assets/media/images/moblie-icons/icon-29x29.png" />
+        <link rel="apple-touch-icon" sizes="50x50" href="<!-- @echo filePath -->assets/media/images/moblie-icons/icon-50x50.png" />
+        <link rel="apple-touch-icon" sizes="58x58" href="<!-- @echo filePath -->assets/media/images/moblie-icons/icon-58x58.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="<!-- @echo filePath -->assets/media/images/moblie-icons/icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="100x100" href="<!-- @echo filePath -->assets/media/images/moblie-icons/icon-100x100.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="<!-- @echo filePath -->assets/media/images/moblie-icons/icon-144x144.png">
 
         <meta name="format-detection" content="telephone-no">
 
@@ -46,26 +46,26 @@
         <meta name="viewport" content="width=device-width">
 
         <!-- @if NODE_ENV == 'DEVELOPMENT' -->
-            <link rel="stylesheet" type="text/css" media="screen" href="styles/import.css" />
+            <link rel="stylesheet" type="text/css" media="screen" href="assets/styles/import.css" />
         <!-- @endif -->
 
         <!-- @if NODE_ENV == 'PRODUCTION' -->
-            <link rel="stylesheet" media="screen, projection" href="styles/main.min.css" />
+            <link rel="stylesheet" media="screen, projection" href="assets/styles/main.min.css" />
         <!-- @endif -->
 
 
     </head>
     <body>
         <!-- @if NODE_ENV == 'DEVELOPMENT' -->
-            <script type="text/javascript" src="libs/jquery/jquery-1.9.1.js"></script>
-            <script type="text/javascript" src="libs/handlebars/handlebars.js"></script>
-            <script type="text/javascript" src="scripts/_compiled/json.js"></script>
-            <script type="text/javascript" src="scripts/_compiled/templates.tmpl.js"></script>
-            <script type="text/javascript" src="scripts/_compiled/app.js"></script>
+            <script type="text/javascript" src="assets/vendor/jquery/jquery-1.9.1.js"></script>
+            <script type="text/javascript" src="assets/vendor/handlebars/handlebars.js"></script>
+            <script type="text/javascript" src="assets/scripts/_compiled/json.js"></script>
+            <script type="text/javascript" src="assets/scripts/_compiled/templates.tmpl.js"></script>
+            <script type="text/javascript" src="assets/scripts/_compiled/app.js"></script>
         <!-- @endif -->
 
         <!-- @if NODE_ENV == 'PRODUCTION' -->
-            <script src="scripts/app.min.js"></script>
+            <script src="assets/scripts/app.min.js"></script>
         <!-- @endif -->
 
         <script>

@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                 version: '<%= pkg.appVersion %>',
                 url: '<%= pkg.homepage %>',
                 options: {
-                    paths: '<%= DEVELOPMENT_PATH %>' + 'scripts/com/',
+                    paths: '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/com/',
                     outdir: '<%= BASE_PATH %>docs',
                     themedir: '',
                     extension: '.ts',                                   // Default '.js' <comma-separated list of file extensions>
@@ -91,12 +91,12 @@ module.exports = function(grunt) {
                 options: {
                     basePath: '<%= PRODUCTION_PATH %>',
                     exclude: [
-                        'images/moblie-icons/icon-144x144.png',
-                        'images/moblie-icons/icon-100x100.png',
-                        'images/moblie-icons/icon-29x29.png',
-                        'images/moblie-icons/icon-50x50.png',
-                        'images/moblie-icons/icon-58x58.png',
-                        'images/moblie-icons/icon-72x72.png'
+                        'assets/media/images/moblie-icons/icon-144x144.png',
+                        'assets/media/images/moblie-icons/icon-100x100.png',
+                        'assets/media/images/moblie-icons/icon-29x29.png',
+                        'assets/media/images/moblie-icons/icon-50x50.png',
+                        'assets/media/images/moblie-icons/icon-58x58.png',
+                        'assets/media/images/moblie-icons/icon-72x72.png'
                     ],
                     preferOnline: false,
                     verbose: true,
@@ -104,11 +104,11 @@ module.exports = function(grunt) {
                     master: []
                 },
                 src: [
-                    'data/**/*.json',
-                    'images/**/*.jpg',
-                    'images/**/*.png',
-                    'scripts/**/*.js',
-                    'styles/**/*.css'
+                    'assets/data/**/*.json',
+                    'assets/media/images/**/*.jpg',
+                    'assets/media/images/**/*.png',
+                    'assets/scripts/**/*.js',
+                    'assets/styles/**/*.css'
                 ],
                 dest: '<%= PRODUCTION_PATH %>' + 'manifest.appcache'
             }
@@ -123,7 +123,7 @@ module.exports = function(grunt) {
                     keepSpecialComments: 0                                                  // '*' for keeping all (default), 1 for keeping first one, 0 for removing all
                 },
                 files: {
-                    '<%= PRODUCTION_PATH %>styles/main.min.css': ['<%= DEVELOPMENT_PATH %>' + 'styles/import.css']
+                    '<%= PRODUCTION_PATH %>assets/styles/main.min.css': ['<%= DEVELOPMENT_PATH %>' + 'assets/styles/import.css']
                 }
             }
         },
@@ -150,7 +150,7 @@ module.exports = function(grunt) {
                     // Copy favicon.ico file from src/ to web/.
                     { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: 'favicon.ico', dest: '<%= PRODUCTION_PATH %>' },
                     // Copy the image folder from src/images/ to web/images/.
-                    { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: ['images/**'], dest: '<%= PRODUCTION_PATH %>' }
+                    { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: ['assets/media/images/**'], dest: '<%= PRODUCTION_PATH %>' }
                 ]
             }
         },
@@ -162,21 +162,21 @@ module.exports = function(grunt) {
                     banner: '<%= banner.join("\\n") %> \n'
                 },
                 src: [
-                    '<%= DEVELOPMENT_PATH %>' + 'libs/jquery/jquery-1.9.1.js',
-                    '<%= DEVELOPMENT_PATH %>' + 'libs/handlebars/handlebars.js',
-                    '<%= DEVELOPMENT_PATH %>' + 'scripts/_compiled/json.js',
-                    '<%= DEVELOPMENT_PATH %>' + 'scripts/_compiled/templates.tmpl.js',
-                    '<%= DEVELOPMENT_PATH %>' + 'scripts/_compiled/app.js'
+                    '<%= DEVELOPMENT_PATH %>' + 'assets/vendor/jquery/jquery-1.9.1.js',
+                    '<%= DEVELOPMENT_PATH %>' + 'assets/vendor/handlebars/handlebars.js',
+                    '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/_compiled/json.js',
+                    '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/_compiled/templates.tmpl.js',
+                    '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/_compiled/app.js'
                 ],
-                dest: '<%= PRODUCTION_PATH %>' + 'scripts/app.min.js'
+                dest: '<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'
             },
             // Add the comment banner to the app.min.js file.
             addBanner: {
                 options: {
                     banner: '<%= banner.join("\\n") %> \n'
                 },
-                src: ['<%= PRODUCTION_PATH %>' + 'scripts/app.min.js'],
-                dest: '<%= PRODUCTION_PATH %>' + 'scripts/app.min.js'
+                src: ['<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'],
+                dest: '<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'
             }
         },
 
@@ -190,8 +190,8 @@ module.exports = function(grunt) {
                         return filename.toLowerCase();
                     }
                 },
-                src: ['<%= DEVELOPMENT_PATH %>' + 'data/**/*.json'],
-                dest:  '<%= DEVELOPMENT_PATH %>' + 'scripts/_compiled/json.js'
+                src: ['<%= DEVELOPMENT_PATH %>' + 'assets/data/**/*.json'],
+                dest:  '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/_compiled/json.js'
             }
         },
 
@@ -213,15 +213,15 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    '<%= DEVELOPMENT_PATH %>scripts/_compiled/templates.tmpl.js': ['<%= DEVELOPMENT_PATH %>' + 'templates/**/*.hbs']
+                    '<%= DEVELOPMENT_PATH %>assets/scripts/_compiled/templates.tmpl.js': ['<%= DEVELOPMENT_PATH %>' + 'assets/templates/**/*.hbs']
                 }
             }
         },
 
         typescript: {
             main: {
-                src: ['<%= DEVELOPMENT_PATH %>' + 'scripts/TestApp.ts'],
-                dest: '<%= DEVELOPMENT_PATH %>' + 'scripts/_compiled/app.js',
+                src: ['<%= DEVELOPMENT_PATH %>' + 'assets/scripts/TestApp.ts'],
+                dest: '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/compiled/app.js',
                 options: {
                     target: 'es3', //or es5
                     base_path: '',
@@ -250,8 +250,8 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    '<%= PRODUCTION_PATH %>scripts/app.min.js': [
-                        '<%= PRODUCTION_PATH %>' + 'scripts/app.min.js'
+                    '<%= PRODUCTION_PATH %>assets/scripts/app.min.js': [
+                        '<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'
                     ]
                 }
             }
@@ -285,9 +285,9 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: [
-                    '<%= DEVELOPMENT_PATH %>' + 'scripts/**/*.ts',
+                    '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/**/*.ts',
                     '<%= DEVELOPMENT_PATH %>' + 'config.html',
-                    '<%= DEVELOPMENT_PATH %>' + 'templates/**/*.hbs'
+                    '<%= DEVELOPMENT_PATH %>' + 'assets/templates/**/*.hbs'
                 ],
                 tasks: ['src']
             },
@@ -296,15 +296,15 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: [
-                    '<%= DEVELOPMENT_PATH %>' + 'scripts/**/*.ts',
+                    '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/**/*.ts',
                     '<%= DEVELOPMENT_PATH %>' + 'config.html',
-                    '<%= DEVELOPMENT_PATH %>' + 'templates/**/*.hbs'
+                    '<%= DEVELOPMENT_PATH %>' + 'assets/templates/**/*.hbs'
                 ],
                 tasks: ['web']
             },
             typescript: {
                 files: [
-                    '<%= DEVELOPMENT_PATH %>' + 'scripts/**/*.ts'
+                    '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/**/*.ts'
                 ],
                 tasks: ['typescript']
             }
