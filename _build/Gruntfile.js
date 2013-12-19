@@ -114,32 +114,36 @@ module.exports = function(grunt) {
             }
         },
 
-        // Minifies our css files that we specify and adds the banner to the top
-        // of the minified css file.
-        cssmin: {
-            main: {
-                options: {
-                    banner: '<%= banner.join("\\n") %>',
-                    keepSpecialComments: 0                                                  // '*' for keeping all (default), 1 for keeping first one, 0 for removing all
-                },
-                files: {
-                    '<%= PRODUCTION_PATH %>assets/styles/main.min.css': ['<%= DEVELOPMENT_PATH %>' + 'assets/styles/import.css']
-                }
-            }
-        },
+//        // Minifies our css files that we specify and adds the banner to the top
+//        // of the minified css file.
+//        cssmin: {
+//            main: {
+//                options: {
+//                    banner: '<%= banner.join("\\n") %>',
+//                    keepSpecialComments: 0                                                  // '*' for keeping all (default), 1 for keeping first one, 0 for removing all
+//                },
+//                files: {
+//                    '<%= PRODUCTION_PATH %>assets/styles/main.min.css': ['<%= DEVELOPMENT_PATH %>' + 'assets/styles/import.css']
+//                }
+//            }
+//        },
 
-        // After the preprocess plugin creates our /index.html we remove all comments
-        // and white space from the file so it will be minified.
-        htmlmin: {
-            dist: {
-                options: {
-                    removeComments: true,
-                    collapseWhitespace: true
-                },
-                files: {
-                    '<%= PRODUCTION_PATH %>index.html': '<%= PRODUCTION_PATH %>' + 'index.html'
-                }
-            }
+//        // After the preprocess plugin creates our /index.html we remove all comments
+//        // and white space from the file so it will be minified.
+//        htmlmin: {
+//            dist: {
+//                options: {
+//                    removeComments: true,
+//                    collapseWhitespace: true
+//                },
+//                files: {
+//                    '<%= PRODUCTION_PATH %>index.html': '<%= PRODUCTION_PATH %>' + 'index.html'
+//                }
+//            }
+//        },
+
+        clean: {
+            dist: ['web']
         },
 
         // Copies certain files over from the src/ folder to the web/ so we don't
@@ -150,33 +154,33 @@ module.exports = function(grunt) {
                     // Copy favicon.ico file from src/ to web/.
                     { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: 'favicon.ico', dest: '<%= PRODUCTION_PATH %>' },
                     // Copy the image folder from src/images/ to web/images/.
-                    { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: ['assets/media/images/**'], dest: '<%= PRODUCTION_PATH %>' }
+                    { expand: true, cwd: '<%= DEVELOPMENT_PATH %>', src: ['assets/media/images/**'], dest: '<%= PRODUCTION_PATH %>' },
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: '<%= DEVELOPMENT_PATH %>',
+                        dest: '<%= PRODUCTION_PATH %>',
+                        src: [
+                            'index.html'
+                        ],
+                        filter: 'isFile'
+                    }
                 ]
             }
         },
 
-        // Takes the minified JavaScript file and adds the banner to the top.
-        concat: {
-            web: {
+        usebanner: {
+            dist: {
                 options: {
-                    banner: '<%= banner.join("\\n") %> \n'
+                    position: 'top',
+                    banner: '<%= banner.join("\\n") %>',
+                    linebreak: true
                 },
-                src: [
-                    '<%= DEVELOPMENT_PATH %>' + 'assets/vendor/jquery/jquery-1.9.1.js',
-                    '<%= DEVELOPMENT_PATH %>' + 'assets/vendor/handlebars/handlebars.js',
-                    '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/_compiled/json.js',
-                    '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/_compiled/templates.tmpl.js',
-                    '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/_compiled/app.js'
-                ],
-                dest: '<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'
-            },
-            // Add the comment banner to the app.min.js file.
-            addBanner: {
-                options: {
-                    banner: '<%= banner.join("\\n") %> \n'
-                },
-                src: ['<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'],
-                dest: '<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'
+                files: {
+                    src: [
+                        '<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'
+                    ]
+                }
             }
         },
 
@@ -233,29 +237,42 @@ module.exports = function(grunt) {
             }
         },
 
-        uglify: {
+        useminPrepare: {
+            html: ['<%= DEVELOPMENT_PATH %>' + 'index.html'],
             options: {
-                output: {
-                    beautify: false,
-                    comments: false
-                },
-                compress: {
-                    sequences: false,
-                    global_defs: {
-                        DEBUG: false
-                    }
-                },
-                warnings: false,
-                mangle: true
-            },
-            dist: {
-                files: {
-                    '<%= PRODUCTION_PATH %>assets/scripts/app.min.js': [
-                        '<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'
-                    ]
-                }
+                dest: '<%= PRODUCTION_PATH %>'
             }
         },
+        usemin: {
+            html: ['<%= PRODUCTION_PATH %>' + 'index.html'],
+            options: {
+                dirs: ['<%= PRODUCTION_PATH %>']
+            }
+        },
+
+//        uglify: {
+//            options: {
+//                output: {
+//                    beautify: false,
+//                    comments: false
+//                },
+//                compress: {
+//                    sequences: false,
+//                    global_defs: {
+//                        DEBUG: false
+//                    }
+//                },
+//                warnings: false,
+//                mangle: true
+//            },
+//            dist: {
+//                files: {
+//                    '<%= PRODUCTION_PATH %>assets/scripts/app.min.js': [
+//                        '<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'
+//                    ]
+//                }
+//            }
+//        },
 
         // grunt-express will serve the files from the folders listed in `bases`
         // on specified `port` and `hostname`
@@ -325,9 +342,13 @@ module.exports = function(grunt) {
     });
 
     // Grunt tasks.
-    grunt.registerTask('default', ['server']);
-    grunt.registerTask('src', ['env:src', 'preprocess:src', 'json', 'handlebars', 'typescript']);
-    grunt.registerTask('web', ['env:web', 'preprocess:web', 'cssmin', 'htmlmin', 'handlebars', 'typescript', 'concat:web', 'uglify', 'copy:web', 'concat:addBanner', 'manifest']);
+    grunt.registerTask('default', ['env:web', 'preprocess:web', 'clean', 'copy',
+        'useminPrepare',
+        'concat', 'uglify', 'cssmin',
+        'usemin', 'usebanner']);
+
+    grunt.registerTask('src', ['env:src', 'preprocess:src', 'json', 'handlebars', 'typescript', 'handlebars', 'typescript']);
+    grunt.registerTask('web', ['env:web', 'preprocess:web', 'cssmin', 'htmlmin', 'handlebars', 'typescript', 'uglify', 'copy:web', 'usebanner', 'manifest']);
 
     grunt.registerTask('server', ['src', 'express:src', 'open:src', 'watch:src']);
     grunt.registerTask('server:web', ['web', 'express:web', 'open:web', 'watch:web']);

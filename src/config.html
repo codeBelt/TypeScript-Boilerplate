@@ -45,28 +45,21 @@
         <!--The width of the viewport in pixels. The default is 980. The range is from 200 to 10,000.-->
         <meta name="viewport" content="width=device-width">
 
-        <!-- @if NODE_ENV == 'DEVELOPMENT' -->
-            <link rel="stylesheet" type="text/css" media="screen" href="assets/styles/import.css" />
-        <!-- @endif -->
-
-        <!-- @if NODE_ENV == 'PRODUCTION' -->
-            <link rel="stylesheet" media="screen, projection" href="assets/styles/main.min.css" />
-        <!-- @endif -->
-
+        <!-- build:css assets/styles/main.min.css -->
+        <link rel="stylesheet" type="text/css" media="screen" href="assets/styles/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="assets/styles/styles.css" />
+        <!-- endbuild -->
 
     </head>
     <body>
-        <!-- @if NODE_ENV == 'DEVELOPMENT' -->
-            <script type="text/javascript" src="assets/vendor/jquery/jquery-1.9.1.js"></script>
-            <script type="text/javascript" src="assets/vendor/handlebars/handlebars.js"></script>
-            <script type="text/javascript" src="assets/scripts/_compiled/json.js"></script>
-            <script type="text/javascript" src="assets/scripts/_compiled/templates.tmpl.js"></script>
-            <script type="text/javascript" src="assets/scripts/_compiled/app.js"></script>
-        <!-- @endif -->
 
-        <!-- @if NODE_ENV == 'PRODUCTION' -->
-            <script src="assets/scripts/app.min.js"></script>
-        <!-- @endif -->
+        <!-- build:js assets/scripts/app.min.js -->
+        <script type="text/javascript" src="assets/vendor/jquery/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="assets/vendor/handlebars/handlebars.js"></script>
+        <script type="text/javascript" src="assets/scripts/_compiled/json.js"></script>
+        <script type="text/javascript" src="assets/scripts/_compiled/templates.tmpl.js"></script>
+        <script type="text/javascript" src="assets/scripts/_compiled/app.js"></script>
+        <!-- endbuild -->
 
         <script>
             window.onload = function(event) {
