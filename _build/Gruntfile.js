@@ -114,33 +114,19 @@ module.exports = function(grunt) {
             }
         },
 
-//        // Minifies our css files that we specify and adds the banner to the top
-//        // of the minified css file.
-//        cssmin: {
-//            main: {
-//                options: {
-//                    banner: '<%= banner.join("\\n") %>',
-//                    keepSpecialComments: 0                                                  // '*' for keeping all (default), 1 for keeping first one, 0 for removing all
-//                },
-//                files: {
-//                    '<%= PRODUCTION_PATH %>assets/styles/main.min.css': ['<%= DEVELOPMENT_PATH %>' + 'assets/styles/import.css']
-//                }
-//            }
-//        },
-
-//        // After the preprocess plugin creates our /index.html we remove all comments
-//        // and white space from the file so it will be minified.
-//        htmlmin: {
-//            dist: {
-//                options: {
-//                    removeComments: true,
-//                    collapseWhitespace: true
-//                },
-//                files: {
-//                    '<%= PRODUCTION_PATH %>index.html': '<%= PRODUCTION_PATH %>' + 'index.html'
-//                }
-//            }
-//        },
+        // After the preprocess plugin creates our /index.html we remove all comments
+        // and white space from the file so it will be minified.
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: {
+                    '<%= PRODUCTION_PATH %>index.html': '<%= PRODUCTION_PATH %>' + 'index.html'
+                }
+            }
+        },
 
         clean: {
             dist: ['web']
@@ -178,7 +164,8 @@ module.exports = function(grunt) {
                 },
                 files: {
                     src: [
-                        '<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'
+                        '<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js',
+                        '<%= PRODUCTION_PATH %>' + 'assets/styles/app.min.css'
                     ]
                 }
             }
@@ -208,7 +195,6 @@ module.exports = function(grunt) {
                     partialRegex: /^_/,
                     // Shortens the file path for the template.
                     processName: function(filename) {
-
                         return filename.slice(filename.indexOf("template"), filename.length);
                     },
                     // Shortens the file path for the template.
@@ -249,30 +235,6 @@ module.exports = function(grunt) {
                 dirs: ['<%= PRODUCTION_PATH %>']
             }
         },
-
-//        uglify: {
-//            options: {
-//                output: {
-//                    beautify: false,
-//                    comments: false
-//                },
-//                compress: {
-//                    sequences: false,
-//                    global_defs: {
-//                        DEBUG: false
-//                    }
-//                },
-//                warnings: false,
-//                mangle: true
-//            },
-//            dist: {
-//                files: {
-//                    '<%= PRODUCTION_PATH %>assets/scripts/app.min.js': [
-//                        '<%= PRODUCTION_PATH %>' + 'assets/scripts/app.min.js'
-//                    ]
-//                }
-//            }
-//        },
 
         // grunt-express will serve the files from the folders listed in `bases`
         // on specified `port` and `hostname`
@@ -342,7 +304,7 @@ module.exports = function(grunt) {
     });
 
     // Grunt tasks.
-    grunt.registerTask('default', ['env:web', 'preprocess:web', 'clean', 'copy',
+    grunt.registerTask('default', ['env:web', 'preprocess', 'clean', 'copy',
         'useminPrepare',
         'concat', 'uglify', 'cssmin',
         'usemin', 'usebanner']);
