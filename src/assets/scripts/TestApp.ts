@@ -6,6 +6,13 @@
 
 module namespace {
 
+    /**
+     * YUIDoc_comment
+     *
+     * @class TestApp
+     * @module namespace
+     * @constructor
+     **/
     export class TestApp {
 
         private _parent:JQuery = null;
@@ -16,6 +23,12 @@ module namespace {
             this._countryData = (<any>window).JSON_DATA.countryList;
         }
 
+        /**
+         * YUIDoc_comment
+         *
+         * @method createChildren
+         * @private
+         */
         private createChildren():void {
             var template:string = TemplateFactory.create('templates/topbar/TopNavigationTemplate.hbs');
             this._parent.append(template);
@@ -24,6 +37,13 @@ module namespace {
             this._parent.append(template);
         }
 
+        /**
+         * YUIDoc_comment
+         *
+         * @method appendTo
+         * @param selector {string}
+         * @public
+         */
         public appendTo(selector:string):void {
             this._parent = $(selector);
             this.createChildren();

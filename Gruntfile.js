@@ -256,7 +256,7 @@ module.exports = function(grunt) {
                 version: '<%= pkg.appVersion %>',
                 url: '<%= pkg.homepage %>',
                 options: {
-                    paths: '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/com/',
+                    paths: '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/',
                     outdir: '<%= BASE_PATH %>docs',
                     themedir: '',
                     extension: '.ts',                                   // Default '.js' <comma-separated list of file extensions>
@@ -334,6 +334,7 @@ module.exports = function(grunt) {
      *
      * grunt        (Will build and run your development code/server)
      * grunt web    (Will build and run your production code/server)
+     * grunt doc    (Will generate the YUI documentation from the code comments)
      */
     grunt.registerTask('default', [
         'server'
@@ -370,6 +371,10 @@ module.exports = function(grunt) {
         'open:web',
         'express:web',
         'express-keepalive'
+    ]);
+
+    grunt.registerTask('doc', [
+        'yuidoc'
     ]);
 
 };
