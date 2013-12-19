@@ -13,8 +13,6 @@ var namespace;
         TemplateFactory.CLASS_NAME = 'TemplateFactory';
 
         TemplateFactory.TEMPLATES = null;
-
-        TemplateFactory.templateNamespace = 'JST';
         return TemplateFactory;
     })();
     namespace.TemplateFactory = TemplateFactory;
@@ -44,3 +42,4 @@ var namespace;
     })();
     namespace.TestApp = TestApp;
 })(namespace || (namespace = {}));
+//# sourceMappingURL=app.js.map
