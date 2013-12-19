@@ -164,9 +164,9 @@ Page Header
 
 .icon-logo {
     height: 16px;
-    width: 30px;
+    width: 16px;
     margin-top: 4px;
-    background-image: url("../images/logo.png");
+    background-image: url("../media/images/logo.png");
     background-position: 0 0;
     text-indent: -999em;
 }
@@ -505,14 +505,6 @@ Wrappers
     margin: 0 auto;
     width: 1024px;
     height: 725px;
-}
-
-.wrapper-primaryImage {
-    background: url("../images/home-background.jpg") no-repeat center 0;
-}
-
-.wrapper-profileImage {
-    background: url("../images/profile-background.jpg") no-repeat center 0;
 }
 
 /* ---------------------------------------------------------------------
