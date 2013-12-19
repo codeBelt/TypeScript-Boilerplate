@@ -15,9 +15,9 @@ module.exports = function(grunt) {
         /**
          * Constants for the Gruntfile so we can easily change the path for our environments.
          */
-        BASE_PATH: '../',
-        DEVELOPMENT_PATH: '../src/',
-        PRODUCTION_PATH: '../web/',
+        BASE_PATH: '',
+        DEVELOPMENT_PATH: 'src/',
+        PRODUCTION_PATH: 'web/',
 
         /**
          * A code block that will be added to our minified code files.
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
          * Cleans or deletes our production folder before we create a new production build.
          */
         clean: {
-            dist: ['web']
+            dist: ['<%= PRODUCTION_PATH %>']
         },
 
         /**
