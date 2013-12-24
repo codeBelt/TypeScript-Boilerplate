@@ -1,6 +1,6 @@
-TypeScript-Boilerplate
+TypeScript Boilerplate
 ======================
-A Grunt TypeScript Boilerplate
+A Grunt TypeScript Boilerplate and Workflow. Checkout the [TypeScript Boilerplate and Workflow Tutorial](http://www.codebelt.com/typescript/my-typescript-workflow-examples/).
 
 
 
