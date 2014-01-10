@@ -5,6 +5,10 @@
     "appVersion": "0.1.0",
     "description": "A TypeScript Boilerplate for Web Applications",
     "url": "https://github.com/codeBelt/TypeScript-Boilerplate",
+    "repository": {
+        "type" : "git" ,
+        "url" : "https://github.com/codeBelt/TypeScript-Boilerplate"
+    },
     "developedBy": "codeBelt",
 
     "devDependencies": {
