@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 
         /**
          * This will load in our package.json file so we can have access
-         * to the project name and appVersion number.
+         * to the project name and version number.
          */
         pkg: grunt.file.readJSON('package.json'),
 
@@ -21,13 +21,13 @@ module.exports = function(grunt) {
 
         /**
          * A code block that will be added to our minified code files.
-         * Gets the name and appVersion and other info from the above loaded 'package.json' file.
+         * Gets the name and version and other info from the above loaded 'package.json' file.
          * @example <%= banner.join("\\n") %>
          */
         banner: [
                  '/*',
                  '* Project: <%= pkg.name %>',
-                 '* Version: <%= pkg.appVersion %> (<%= grunt.template.today("yyyy-mm-dd") %>)',
+                 '* Version: <%= pkg.version %> (<%= grunt.template.today("yyyy-mm-dd") %>)',
                  '* Development By: <%= pkg.developedBy %>',
                  '* Copyright(c): <%= grunt.template.today("yyyy") %>',
                  '*/'
@@ -59,7 +59,7 @@ module.exports = function(grunt) {
                 dest : '<%= DEVELOPMENT_PATH %>' + 'index.html',
                 options : {
                     context : {
-                        appVersion : '<%= pkg.appVersion %>',
+                        appVersion : '<%= pkg.version %>',
                         filePath: ''
                     }
                 }
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
                 dest : '<%= PRODUCTION_PATH %>' + 'index.html',
                 options : {
                     context : {
-                        appVersion : '<%= pkg.appVersion %>',
+                        appVersion : '<%= pkg.version %>',
                         filePath: ''
                     }
                 }
@@ -119,6 +119,15 @@ module.exports = function(grunt) {
                     ]
                 }
             }
+        },
+
+        bumpup: {
+            options: {
+                updateProps: {
+                    pkg: 'package.json'
+                }
+            },
+            file: 'package.json'
         },
 
         /**
@@ -357,6 +366,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('web', [
+        'bumpup',
         'env:web',
         'preprocess',
         'json',
