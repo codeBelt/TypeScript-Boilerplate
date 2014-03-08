@@ -6,12 +6,13 @@ module namespace {
      * @class TemplateFactory
      * @module namespace
      * @constructor
+     * @static
      **/
     export class TemplateFactory {
 
         public static CLASS_NAME:string = 'TemplateFactory';
 
-        public static TEMPLATES:any = null;
+        public static TEMPLATES = (<any>window).JST;
 
         constructor() {
         }

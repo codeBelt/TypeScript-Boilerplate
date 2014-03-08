@@ -12,34 +12,73 @@ var namespace;
         };
         TemplateFactory.CLASS_NAME = 'TemplateFactory';
 
-        TemplateFactory.TEMPLATES = null;
+        TemplateFactory.TEMPLATES = window.JST;
         return TemplateFactory;
     })();
     namespace.TemplateFactory = TemplateFactory;
 })(namespace || (namespace = {}));
 var namespace;
 (function (namespace) {
-    var TestApp = (function () {
-        function TestApp() {
+    var Base = (function () {
+        function Base() {
             this._parent = null;
-            this._countryData = null;
-            namespace.TemplateFactory.TEMPLATES = window.JST;
-            this._countryData = window.JSON_DATA.countryList;
         }
-        TestApp.prototype.createChildren = function () {
-            var template = namespace.TemplateFactory.create('templates/topbar/TopNavigationTemplate.hbs');
-            this._parent.append(template);
-
-            template = namespace.TemplateFactory.create('templates/login/LoginTemplate.hbs', { title: 'TypeScript Boilerplate' });
-            this._parent.append(template);
+        Base.prototype.createChildren = function () {
         };
 
-        TestApp.prototype.appendTo = function (selector) {
+        Base.prototype.appendTo = function (selector) {
             this._parent = $(selector);
             this.createChildren();
         };
-        return TestApp;
+
+        Base.prototype.addChild = function (template) {
+            this._parent.append(template);
+        };
+        return Base;
     })();
+    namespace.Base = Base;
+})(namespace || (namespace = {}));
+var anotherNamespace;
+(function (anotherNamespace) {
+    var AnotherNamespaceClass = (function () {
+        function AnotherNamespaceClass() {
+        }
+        AnotherNamespaceClass.prototype.sayHi = function () {
+            console.log('Hi there!');
+        };
+        return AnotherNamespaceClass;
+    })();
+    anotherNamespace.AnotherNamespaceClass = AnotherNamespaceClass;
+})(anotherNamespace || (anotherNamespace = {}));
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var namespace;
+(function (namespace) {
+    var AnotherNamespaceClass = anotherNamespace.AnotherNamespaceClass;
+
+    var TestApp = (function (_super) {
+        __extends(TestApp, _super);
+        function TestApp() {
+            _super.call(this);
+            this._title = 'TypeScript Boilerplate';
+            this._anotherClass = null;
+        }
+        TestApp.prototype.createChildren = function () {
+            var template = namespace.TemplateFactory.create('templates/topbar/TopNavigationTemplate.hbs');
+            this.addChild(template);
+
+            template = namespace.TemplateFactory.create('templates/login/LoginTemplate.hbs', { title: this._title });
+            this.addChild(template);
+
+            this._anotherClass = new AnotherNamespaceClass();
+            this._anotherClass.sayHi();
+        };
+        return TestApp;
+    })(namespace.Base);
     namespace.TestApp = TestApp;
 })(namespace || (namespace = {}));
 //# sourceMappingURL=app.js.map
