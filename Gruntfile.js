@@ -121,6 +121,9 @@ module.exports = function(grunt) {
             }
         },
 
+        /**
+         * Automatically increases the version number in the package.json whenever a production build is made.
+         */
         bumpup: {
             options: {
                 updateProps: {
@@ -345,6 +348,7 @@ module.exports = function(grunt) {
      * grunt        (Will build and run your development code/server)
      * grunt web    (Will build and run your production code/server)
      * grunt doc    (Will generate the YUI documentation from the code comments)
+     * grunt build  (Will build the production code but will not start a local server.)
      */
     grunt.registerTask('default', [
         'server'
@@ -366,6 +370,13 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('web', [
+        'build',
+        'open:web',
+        'express:web',
+        'express-keepalive'
+    ]);
+
+    grunt.registerTask('build', [
         'bumpup',
         'env:web',
         'preprocess',
@@ -378,10 +389,7 @@ module.exports = function(grunt) {
         'usemin',
         'usebanner',
         'htmlmin',
-        'manifest',
-        'open:web',
-        'express:web',
-        'express-keepalive'
+        'manifest'
     ]);
 
     grunt.registerTask('doc', [
