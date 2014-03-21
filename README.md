@@ -2,6 +2,7 @@ TypeScript Boilerplate
 ======================
 A Grunt TypeScript Boilerplate and Workflow. Checkout the [TypeScript Boilerplate and Workflow Tutorial](http://www.codebelt.com/typescript/my-typescript-workflow-examples/).
 
+Be sure to check out all my [TypeScript tutorials and examples](http://www.codebelt.com/category/typescript/).
 
 
 ###GruntJS - Getting Started
