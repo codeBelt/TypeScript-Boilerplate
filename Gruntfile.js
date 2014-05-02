@@ -21,8 +21,8 @@ module.exports = function(grunt) {
 
         /**
          * A code block that will be added to our minified code files.
-         * Gets the name and version and other info from the above loaded 'package.json' file.
-         * @example <%= banner.join("\\n") %>
+         * Gets the name and appVersion and other info from the above loaded 'package.json' file.
+         * @example <%= banner %>
          */
         banner: [
                  '/*',
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
                  '* Development By: <%= pkg.developedBy %>',
                  '* Copyright(c): <%= grunt.template.today("yyyy") %>',
                  '*/'
-        ],
+        ].join('\n'),
 
         /**
          * The different constant names that will be use to build our html files.
@@ -83,6 +83,7 @@ module.exports = function(grunt) {
          */
         clean: {
             web: ['<%= PRODUCTION_PATH %>'],
+            docs: ['<%= BASE_PATH %>docs'],
             temp: ['.tmp']
         },
 
@@ -161,12 +162,12 @@ module.exports = function(grunt) {
                     // Registers all files that start with '_' as a partial.
                     partialRegex: /^_/,
                     // Shortens the file path for the templates.
-                    processName: function(filename) {
-                        return filename.slice(filename.indexOf("template"), filename.length);
+                    processName: function(filePath) { // input:  src/templates/_header.hbs
+                        return filePath.slice(filePath.indexOf('template'), filePath.lastIndexOf('.')); // output: templates/_header
                     },
                     // Shortens the file path for the partials.
-                    processPartialName: function(filePath) {
-                        return filePath.slice(filePath.indexOf("template"), filePath.length);
+                    processPartialName: function(filePath) { // input:  src/templates/_header.hbs
+                        return filePath.slice(filePath.indexOf('template'), filePath.lastIndexOf('.')); // output: templates/_header
                     }
                 },
                 files: {
@@ -276,6 +277,10 @@ module.exports = function(grunt) {
                     exclude: ''
                 }
             }
+        },
+
+        concurrent: {
+            src: ['json', 'handlebars', 'typescript']
         },
 
         /**
@@ -393,6 +398,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('doc', [
+        'clean:docs',
         'yuidoc'
     ]);
 

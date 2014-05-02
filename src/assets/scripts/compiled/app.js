@@ -68,10 +68,10 @@ var namespace;
             this._anotherClass = null;
         }
         TestApp.prototype.createChildren = function () {
-            var template = namespace.TemplateFactory.create('templates/topbar/TopNavigationTemplate.hbs');
+            var template = namespace.TemplateFactory.create('templates/topbar/TopNavigationTemplate');
             this.addChild(template);
 
-            template = namespace.TemplateFactory.create('templates/login/LoginTemplate.hbs', { title: this._title });
+            template = namespace.TemplateFactory.create('templates/login/LoginTemplate', { title: this._title });
             this.addChild(template);
 
             this._anotherClass = new AnotherNamespaceClass();

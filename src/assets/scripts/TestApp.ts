@@ -30,10 +30,10 @@ module namespace {
          * @overridden Base.createChildren
          */
         public createChildren():void {
-            var template:string = TemplateFactory.create('templates/topbar/TopNavigationTemplate.hbs');
+            var template:string = TemplateFactory.create('templates/topbar/TopNavigationTemplate');
             this.addChild(template);
 
-            template = TemplateFactory.create('templates/login/LoginTemplate.hbs', {title: this._title});
+            template = TemplateFactory.create('templates/login/LoginTemplate', {title: this._title});
             this.addChild(template);
 
             this._anotherClass = new AnotherNamespaceClass();
