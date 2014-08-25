@@ -31,7 +31,7 @@ module.exports = function(grunt) {
                  '* Development By: <%= pkg.developedBy %>',
                  '* Copyright(c): <%= grunt.template.today("yyyy") %>',
                  '*/'
-        ].join('\n'),
+        ],
 
         /**
          * The different constant names that will be use to build our html files.
@@ -185,8 +185,8 @@ module.exports = function(grunt) {
                 dest: '<%= DEVELOPMENT_PATH %>' + 'assets/scripts/compiled/app.js',
                 options: {
                     target: 'es3', //or es5
-                    base_path: '',
-                    sourcemap: true,
+                    basePath: '',
+                    sourceMap: true,
                     declaration: false,
                     nolib: false,
                     comments: false
